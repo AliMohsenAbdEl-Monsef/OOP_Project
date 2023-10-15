@@ -1,11 +1,10 @@
-//OOP Project done by Ali Mohsen (20221106), Abdulrahman Mohamed (20221099) and Mostafa Anwar (20221153)
-// suiiiii
-
 #include <bits/stdc++.h>
 #include "bmplib.cpp"
 #include <vector>
 using namespace std;
 unsigned char image[SIZE][SIZE];
+unsigned char image2[SIZE][SIZE];
+void saveImage();
 void edges();
 void DandL();
 void rotate();
@@ -14,7 +13,6 @@ void merge();
 void invert();
 void BlackandWhite();
 void loadImage();
-void saveImage();
 void enlarge();
 void Blur();
 void shrink();
@@ -23,10 +21,10 @@ void crop();
 void shuffle();
 void skewV();
 void skewH();
-void Show_Menu(int ch = 0)
+void Show_Menu(int ch = 0,int c=0)
 {
 
-  loadImage();
+  if(ch!=16&&!c)loadImage();
 
   if (ch == 1)
   {
@@ -52,42 +50,45 @@ void Show_Menu(int ch = 0)
   {
     DandL();
   }
-  // else if (ch == 7)
-  // {
-  //   edges();
-  // }
-  // else if (ch == 8)
-  // {
-  //   enlarge();
-  // }
-  // else if (ch == 9)
-  // {
-  //   shrink();
-  // }
-  // else if (ch == 10)
-  // {
-  //   mirror();
-  // }
-  // else if (ch == 11)
-  // {
-  //   shuffle();
-  // }
-  // else if (ch == 12)
-  // {
-  //   Blur();
-  // }
-  // else if (ch == 13)
-  // {
-  //   crop();
-  // }
-  // else if (ch == 14)
-  // {
-  //   skewV();
-  // }
-  // else if (ch == 15)
-  // {
-  //   skewH();
-  // }
+  else if(ch==16){
+    saveImage();
+  }
+  else if (ch == 7)
+  {
+    edges();
+  }
+  else if (ch == 8)
+  {
+    enlarge();
+  }
+  else if (ch == 9)
+  {
+    shrink();
+  }
+  else if (ch == 10)
+  {
+    mirror();
+  }
+  else if (ch == 11)
+  {
+    shuffle();
+  }
+  else if (ch == 12)
+  {
+    Blur();
+  }
+  else if (ch == 13)
+  {
+    crop();
+  }
+  else if (ch == 14)
+  {
+    skewV();
+  }
+  else if (ch == 15)
+  {
+    skewH();
+  }
 }
 void flip()
 {
@@ -123,7 +124,7 @@ start:;
     goto start;
   }
 
-  saveImage();
+  // saveImage();
 }
 void BlackandWhite()
 {
@@ -137,7 +138,7 @@ void BlackandWhite()
       else
         image[i][j] = 0;
     }
-  saveImage();
+  // saveImage();
 }
 void invert()
 {
@@ -146,7 +147,7 @@ void invert()
     {
       image[i][j] = 255 - image[i][j];
     }
-  saveImage();
+  // saveImage();
 }
 void merge()
 {
@@ -166,7 +167,7 @@ void merge()
     {
       image[i][j] = (image[i][j] + second[i][j]) / 2;
     }
-  saveImage();
+  // saveImage();
 }
 void rotate()
 {
@@ -182,15 +183,20 @@ void rotate()
       {
         temp[j][255 - i] = image[i][j];
       }
-    char imageFileName[100];
+       for (int i = 0; i < 256; i++)
+      for (int j = 0; j < 256; j++)
+      {
+        image[i][j]=temp[i][j];
+      }
+    // char imageFileName[100];
 
-    // Get gray scale image target file name
-    cout << "Enter the target image file name: ";
-    cin >> imageFileName;
+    // // Get gray scale image target file name
+    // cout << "Enter the target image file name: ";
+    // cin >> imageFileName;
 
-    // Add to it .bmp extension and load image
-    strcat(imageFileName, ".bmp");
-    writeGSBMP(imageFileName, temp);
+    // // Add to it .bmp extension and load image
+    // strcat(imageFileName, ".bmp");
+    // writeGSBMP(imageFileName, temp);
   }
   else if (c == 180)
   {
@@ -199,15 +205,21 @@ void rotate()
       {
         temp[i][j] = image[255 - i][255 - j];
       }
-    char imageFileName[100];
+      for (int i = 0; i < 256; i++)
+      for (int j = 0; j < 256; j++)
+      {
+        image[i][j]=temp[i][j];
+      }
+      
+    // char imageFileName[100];
 
-    // Get gray scale image target file name
-    cout << "Enter the target image file name: ";
-    cin >> imageFileName;
+    // // Get gray scale image target file name
+    // cout << "Enter the target image file name: ";
+    // cin >> imageFileName;
 
-    // Add to it .bmp extension and load image
-    strcat(imageFileName, ".bmp");
-    writeGSBMP(imageFileName, temp);
+    // // Add to it .bmp extension and load image
+    // strcat(imageFileName, ".bmp");
+    // writeGSBMP(imageFileName, temp);
   }
   else if (c == 270)
   {
@@ -216,15 +228,20 @@ void rotate()
       {
         temp[255 - j][i] = image[i][j];
       }
-    char imageFileName[100];
+   for (int i = 0; i < 256; i++)
+      for (int j = 0; j < 256; j++)
+      {
+        image[i][j]=temp[i][j];
+      }
+    // char imageFileName[100];
 
-    // Get gray scale image target file name
-    cout << "Enter the target image file name: ";
-    cin >> imageFileName;
+    // // Get gray scale image target file name
+    // cout << "Enter the target image file name: ";
+    // cin >> imageFileName;
 
-    // Add to it .bmp extension and load image
-    strcat(imageFileName, ".bmp");
-    writeGSBMP(imageFileName, temp);
+    // // Add to it .bmp extension and load image
+    // strcat(imageFileName, ".bmp");
+    // writeGSBMP(imageFileName, temp);
   }
 }
 void DandL()
@@ -243,7 +260,7 @@ void DandL()
       {
         image[i][j] = ((image[i][j] + (image[i][j] * (per / 100.0))) > 255) ? 255 : image[i][j] + (image[i][j] * (per / 100.0));
       }
-    saveImage();
+    // saveImage();
   }
   else if (tolower(x) == 'b')
   {
@@ -252,7 +269,7 @@ void DandL()
       {
         image[i][j] = image[i][j] - (image[i][j] * (per / 100.0));
       }
-    saveImage();
+    // saveImage();
   }
 }
 int arr[] = {1, 0, -1, 0, 1, 1, -1, 1};
@@ -308,15 +325,13 @@ void edges()
       }
     }
   }
-  char imageFileName[100];
+for(int i = 0; i<SIZE; i++){
+  for (int j = 0; j<SIZE; j++){
+    image[i][j] = second[i][j];
 
-  // Get gray scale image target file name
-  cout << "Enter the target image file name: ";
-  cin >> imageFileName;
-
-  // Add to it .bmp extension and load image
-  strcat(imageFileName, ".bmp");
-  writeGSBMP(imageFileName, second);
+  }
+}
+   // saveImage();
 };
 void enlarge()
 {
@@ -329,7 +344,7 @@ void enlarge()
        << "|           /|                  |                 _                  |\n"
        << "|            |                  |                / \\                 |\n"
        << "|            |                  |                  /                 |\n"
-       << "|           |                 |                /_                |\n"
+       << "|            |                  |                 /_                 |\n"
        << "----------------------------------------------------------------------\n"
        << "|            __                 |               |      |             |\n"
        << "|           /  \\                |               |______|             |\n"
@@ -442,15 +457,11 @@ void enlarge()
     i += 2;
   }
 
-  char imageFileName[100];
-
-  // Get gray scale image target file name
-  cout << "Enter the target image file name: ";
-  cin >> imageFileName;
-
-  // Add to it .bmp extension and load image
-  strcat(imageFileName, ".bmp");
-  writeGSBMP(imageFileName, temp);
+for(int i =0;i<256;i++){
+  for(int j=0;j<256;j++){
+   image[i][j]= temp [i][j];
+  }
+}
 }
 void Blur()
 {
@@ -496,19 +507,17 @@ void Blur()
     }
   }
 
-  char imageFileName[100];
+ for(int i = 0; i<SIZE; i++){
+  for (int j = 0; j<SIZE; j++){
+    image[i][j] = temp[i][j];
 
-  // Get gray scale image target file name
-  cout << "Enter the target image file name: ";
-  cin >> imageFileName;
-
-  // Add to it .bmp extension and load image
-  strcat(imageFileName, ".bmp");
-  writeGSBMP(imageFileName, temp);
+  }
+}
+  
 }
 void mirror()
 {
-  cout << "Kindly, Enter a character refers to the half which you want to make a mirror to it" << endl;
+  cout << "Kindly, Enter a character refers to the half which you want to make a mirror to it, r for right, u for up, d for down, l for left\n" << endl;
   char c;
   unsigned char temp[SIZE][SIZE];
   cin >> c;
@@ -553,7 +562,7 @@ void mirror()
       }
     }
   }
-  saveImage();
+  
 }
 void shrink()
 {
@@ -627,11 +636,13 @@ void shrink()
       }
     }
   }
-  char imageFileName[100];
-  cout << "Enter the target image file name: ";
-  cin >> imageFileName;
-  strcat(imageFileName, ".bmp");
-  writeGSBMP(imageFileName, temp);
+for(int i = 0; i<SIZE; i++){
+  for (int j = 0; j<SIZE; j++){
+    image[i][j] = temp[i][j];
+
+  }
+}
+ 
 };
 void crop()
 {
@@ -665,11 +676,12 @@ void crop()
       }
     }
   }
-  char imageFileName[100];
-  cout << "Enter the target image file name: ";
-  cin >> imageFileName;
-  strcat(imageFileName, ".bmp");
-  writeGSBMP(imageFileName, temp);
+for(int i = 0; i<SIZE; i++){
+  for (int j = 0; j<SIZE; j++){
+    image[i][j] = temp[i][j];
+
+  }
+}
 };
 void shuffle()
 {
@@ -767,7 +779,7 @@ void shuffle()
       v++;
     }
   }
-  saveImage();
+
 }
 void skewV()
 {
@@ -842,15 +854,13 @@ start:;
     }
     u--, w++;
   }
-  char imageFileName[100];
+for(int i = 0; i<SIZE; i++){
+  for (int j = 0; j<SIZE; j++){
+    image[i][j] = temp[i][j];
 
-  // Get gray scale image target file name
-  cout << "Enter the target image file name: ";
-  cin >> imageFileName;
-
-  // Add to it .bmp extension and load image
-  strcat(imageFileName, ".bmp");
-  writeGSBMP(imageFileName, temp);
+  }
+}
+  
 }
 void skewH()
 {
@@ -929,16 +939,13 @@ start:;
     }
     u--, w++;
   }
-  char imageFileName[100];
+for(int i = 0; i<SIZE; i++){
+  for (int j = 0; j<SIZE; j++){
+    image[i][j] = temp[i][j];
 
-  // Get gray scale image target file name
-  cout << "Enter the target image file name: ";
-  cin >> imageFileName;
-
-  // Add to it .bmp extension and load image
-  strcat(imageFileName, ".bmp");
-  writeGSBMP(imageFileName, temp);
+  }
 }
+  }
 int main()
 {
   // loadImage();
@@ -951,6 +958,7 @@ int main()
        << endl;
   string choice;
   bool ck = true;
+  int g=0;
   while (true)
 
   {
@@ -960,23 +968,26 @@ int main()
       cout << "your input is out of boundary or invalid\n"
            << "Please, type a valid number \'between 0 to 6 inclusive\'" << endl;
     }
+   // cout<<"If you want to save the image type 7: ";
 
-    cout << "1) Black & White Filter\n"
+
+    cout <<"1) Black & White Filter\n"
             "2) Invert Filter\n"
             "3) Merge Filter \n"
             "4) Flip Image\n"
             "5) Rotate Image \n"
-            "6) Darken or Lighten\n";
-            // "7) Detect Image Edges \n"
-            // "8) Enlarge Image\n"
-            // "9) Shrink Image\n"
-            // "10) Mirror 1/2 Image\n"
-            // "11) Shuffle Image\n"
-            // "12) Blur Image\n"
-            // "13) Crop Image\n"
-            // "14) Skew Image Right  \n"
-            // "15) Skew Image Up  \n";
-    // "16) Save the image to a file " << endl;
+            "6) Darken or Lighten\n"
+            "7) Detect Image Edges \n"
+            "8) Enlarge Image\n"
+            "9) Shrink Image\n"
+            "10) Mirror 1/2 Image\n"
+            "11) Shuffle Image\n"
+            "12) Blur Image\n"
+            "13) Crop Image\n"
+            "14) Skew Image Right  \n"
+            "15) Skew Image Up  \n"
+    "16) Save the image to a file \n" 
+    "0) For exit"<<endl;
     cout << "-------------------------------------------------------" << endl;
     cin >> choice;
     bool flag = true;
@@ -1002,7 +1013,7 @@ int main()
 
     if (flag)
     {
-      flag = (u > 0 && u <= 6) ? 1 : 0;
+      flag = (u > 0 && u <= 16) ? 1 : 0;
     }
 
     if (!flag)
@@ -1012,8 +1023,10 @@ int main()
     }
 
     ck = true;
+    
     // cout<<u<<endl;
-    Show_Menu(u);
+    Show_Menu(u,g);
+    g=1;
     cout << "-----------------------------------------------------------" << endl;
   }
   cout << "We hope that our program was useful for you, you can share us your impression of the program if you want or type \'NO\' to exit: " << endl;
