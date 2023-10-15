@@ -21,10 +21,11 @@ void crop();
 void shuffle();
 void skewV();
 void skewH();
-void Show_Menu(int ch = 0,int c=0)
+void Show_Menu(int ch = 0, int c = 0)
 {
 
-  if(ch!=16&&!c)loadImage();
+  if (ch != 16 && !c)
+    loadImage();
 
   if (ch == 1)
   {
@@ -50,7 +51,8 @@ void Show_Menu(int ch = 0,int c=0)
   {
     DandL();
   }
-  else if(ch==16){
+  else if (ch == 16)
+  {
     saveImage();
   }
   else if (ch == 7)
@@ -175,6 +177,7 @@ void rotate()
   cout << "Choose from 90 or 180 or 270" << endl
        << endl;
   int c;
+start:;
   cin >> c;
   if (c == 90)
   {
@@ -183,10 +186,10 @@ void rotate()
       {
         temp[j][255 - i] = image[i][j];
       }
-       for (int i = 0; i < 256; i++)
+    for (int i = 0; i < 256; i++)
       for (int j = 0; j < 256; j++)
       {
-        image[i][j]=temp[i][j];
+        image[i][j] = temp[i][j];
       }
     // char imageFileName[100];
 
@@ -205,12 +208,12 @@ void rotate()
       {
         temp[i][j] = image[255 - i][255 - j];
       }
-      for (int i = 0; i < 256; i++)
+    for (int i = 0; i < 256; i++)
       for (int j = 0; j < 256; j++)
       {
-        image[i][j]=temp[i][j];
+        image[i][j] = temp[i][j];
       }
-      
+
     // char imageFileName[100];
 
     // // Get gray scale image target file name
@@ -228,10 +231,10 @@ void rotate()
       {
         temp[255 - j][i] = image[i][j];
       }
-   for (int i = 0; i < 256; i++)
+    for (int i = 0; i < 256; i++)
       for (int j = 0; j < 256; j++)
       {
-        image[i][j]=temp[i][j];
+        image[i][j] = temp[i][j];
       }
     // char imageFileName[100];
 
@@ -243,16 +246,35 @@ void rotate()
     // strcat(imageFileName, ".bmp");
     // writeGSBMP(imageFileName, temp);
   }
+  else
+  {
+    cout << "invalid number, please enter a value berween \" 90, 180, 270 \"\n";
+    goto start;
+  }
 }
 void DandL()
 {
   cout << "Choose from B or W" << endl
        << endl;
   char x;
+start:;
   cin >> x;
-  cout << "Please, Enter the percentage of " << x << endl;
+  if (tolower(x) == 'b' || tolower(x) == 'w')
+    cout << "Please, Enter the percentage of " << x << endl;
+  else
+  {
+    cout << "invalid input, please enter B for darken and W for lighten the image\n";
+    goto start;
+  }
   int per;
+
+start2:;
   cin >> per;
+  if (per > 100 || per < 0)
+  {
+    cout << "invalid percentage, please enter a percentage between 0 to 100 iclusive\n";
+    goto start2;
+  }
   if (tolower(x) == 'w')
   {
     for (int i = 0; i < 256; i++)
@@ -325,13 +347,14 @@ void edges()
       }
     }
   }
-for(int i = 0; i<SIZE; i++){
-  for (int j = 0; j<SIZE; j++){
-    image[i][j] = second[i][j];
-
+  for (int i = 0; i < SIZE; i++)
+  {
+    for (int j = 0; j < SIZE; j++)
+    {
+      image[i][j] = second[i][j];
+    }
   }
-}
-   // saveImage();
+  // saveImage();
 };
 void enlarge()
 {
@@ -457,11 +480,13 @@ void enlarge()
     i += 2;
   }
 
-for(int i =0;i<256;i++){
-  for(int j=0;j<256;j++){
-   image[i][j]= temp [i][j];
+  for (int i = 0; i < 256; i++)
+  {
+    for (int j = 0; j < 256; j++)
+    {
+      image[i][j] = temp[i][j];
+    }
   }
-}
 }
 void Blur()
 {
@@ -507,20 +532,27 @@ void Blur()
     }
   }
 
- for(int i = 0; i<SIZE; i++){
-  for (int j = 0; j<SIZE; j++){
-    image[i][j] = temp[i][j];
-
+  for (int i = 0; i < SIZE; i++)
+  {
+    for (int j = 0; j < SIZE; j++)
+    {
+      image[i][j] = temp[i][j];
+    }
   }
-}
-  
 }
 void mirror()
 {
-  cout << "Kindly, Enter a character refers to the half which you want to make a mirror to it, r for right, u for up, d for down, l for left\n" << endl;
+start:;
+  cout << "Kindly, Enter a character refers to the half which you want to make a mirror to it, r for right, u for up, d for down, l for left\n"
+       << endl;
   char c;
   unsigned char temp[SIZE][SIZE];
   cin >> c;
+  if (!(tolower(c) == 'r' || tolower(c) == 'l' || tolower(c) == 'u' || tolower(c) == 'd'))
+  {
+    cout << "invalid input.\n";
+    goto start;
+  }
   int x, y, z, w;
   if (tolower(c) == 'r')
   {
@@ -562,7 +594,6 @@ void mirror()
       }
     }
   }
-  
 }
 void shrink()
 {
@@ -575,7 +606,13 @@ void shrink()
        << "1/4 Press 3"
        << "\n";
   int x;
+start:;
   cin >> x;
+  if (!(x == 1 || x == 2 || x == 3))
+  {
+    cout << "invalid number. please, enter \'1, 2, 3\'\n";
+    goto start;
+  }
   unsigned char temp[SIZE][SIZE] = {255};
   int arr[SIZE][SIZE] = {0};
   if (x == 1)
@@ -636,13 +673,13 @@ void shrink()
       }
     }
   }
-for(int i = 0; i<SIZE; i++){
-  for (int j = 0; j<SIZE; j++){
-    image[i][j] = temp[i][j];
-
+  for (int i = 0; i < SIZE; i++)
+  {
+    for (int j = 0; j < SIZE; j++)
+    {
+      image[i][j] = temp[i][j];
+    }
   }
-}
- 
 };
 void crop()
 {
@@ -650,17 +687,51 @@ void crop()
   int arr[SIZE][SIZE] = {0};
   cout << "We need four integers (to determine the corners of the rectangel which you want to crop ) \n";
   cout << "Kindely, Enter x position: \n";
+start:;
   cin >> x;
-  cout << "Kindely, Enter y position: \n";
-  cin >> y;
-  cout << "Please, Enter the length: \n";
-  cin >> l;
-  cout << "Please, Enter the width: \n";
-  cin >> w;
-  unsigned char temp[SIZE][SIZE];
-  for (int i = x; i < x + w && i < SIZE; i++)
+  if (x < 0 || x > 255)
   {
-    for (int j = y; j < y + l && y < SIZE; j++)
+    cout << "invalid input, enter a number between 0 to 255 inclusive\n";
+    goto start;
+  }
+  cout << "Kindely, Enter y position: \n";
+start2:;
+  cin >> y;
+  if (y < 0 || y > 255)
+  {
+    cout << "invalid input, enter a number between 0 to 255 inclusive\n";
+    goto start2;
+  }
+  cout << "Please, Enter the length: \n";
+start3:;
+  cin >> l;
+  if (y + l < x)
+  {
+    cout << "invalid input, length must be positive\n";
+    goto start3;
+  }
+
+  cout << "Please, Enter the width: \n";
+start4:;
+  cin >> w;
+  if (x + w < x)
+  {
+    cout << "invalid input, width must be positive\n";
+    goto start4;
+  }
+  int v = x + w, vv = y + l;
+  if (x + w > 255)
+  {
+    v = 255;
+  }
+  if (y + l > 255)
+  {
+    vv = 255;
+  }
+  unsigned char temp[SIZE][SIZE];
+  for (int i = x; i < v && i < SIZE; i++)
+  {
+    for (int j = y; j < vv && y < SIZE; j++)
     {
       temp[i][j] = image[i][j];
       arr[i][j] = 1;
@@ -676,12 +747,13 @@ void crop()
       }
     }
   }
-for(int i = 0; i<SIZE; i++){
-  for (int j = 0; j<SIZE; j++){
-    image[i][j] = temp[i][j];
-
+  for (int i = 0; i < SIZE; i++)
+  {
+    for (int j = 0; j < SIZE; j++)
+    {
+      image[i][j] = temp[i][j];
+    }
   }
-}
 };
 void shuffle()
 {
@@ -779,7 +851,6 @@ void shuffle()
       v++;
     }
   }
-
 }
 void skewV()
 {
@@ -854,13 +925,13 @@ start:;
     }
     u--, w++;
   }
-for(int i = 0; i<SIZE; i++){
-  for (int j = 0; j<SIZE; j++){
-    image[i][j] = temp[i][j];
-
+  for (int i = 0; i < SIZE; i++)
+  {
+    for (int j = 0; j < SIZE; j++)
+    {
+      image[i][j] = temp[i][j];
+    }
   }
-}
-  
 }
 void skewH()
 {
@@ -939,26 +1010,28 @@ start:;
     }
     u--, w++;
   }
-for(int i = 0; i<SIZE; i++){
-  for (int j = 0; j<SIZE; j++){
-    image[i][j] = temp[i][j];
-
+  for (int i = 0; i < SIZE; i++)
+  {
+    for (int j = 0; j < SIZE; j++)
+    {
+      image[i][j] = temp[i][j];
+    }
   }
 }
-  }
 int main()
 {
   // loadImage();
   // doSomethingForImage();
   // saveImage();
   cout << "Hello dear user, Welcome to our amazing program" << endl;
+  cout << "Note, this program dealing only with grey images\n";
   cout << "**********************************************************************" << endl;
   cout << endl;
   cout << "Kindly Select a number that maps to the option you want from the below options or Type \'0\' to exit: " << endl
        << endl;
   string choice;
   bool ck = true;
-  int g=0;
+  int g = 0;
   while (true)
 
   {
@@ -968,10 +1041,9 @@ int main()
       cout << "your input is out of boundary or invalid\n"
            << "Please, type a valid number \'between 0 to 6 inclusive\'" << endl;
     }
-   // cout<<"If you want to save the image type 7: ";
+    // cout<<"If you want to save the image type 7: ";
 
-
-    cout <<"1) Black & White Filter\n"
+    cout << "1) Black & White Filter\n"
             "2) Invert Filter\n"
             "3) Merge Filter \n"
             "4) Flip Image\n"
@@ -986,8 +1058,9 @@ int main()
             "13) Crop Image\n"
             "14) Skew Image Right  \n"
             "15) Skew Image Up  \n"
-    "16) Save the image to a file \n" 
-    "0) For exit"<<endl;
+            "16) Save the image to a file \n"
+            "0) For exit"
+         << endl;
     cout << "-------------------------------------------------------" << endl;
     cin >> choice;
     bool flag = true;
@@ -1023,10 +1096,10 @@ int main()
     }
 
     ck = true;
-    
+
     // cout<<u<<endl;
-    Show_Menu(u,g);
-    g=1;
+    Show_Menu(u, g);
+    g = 1;
     cout << "-----------------------------------------------------------" << endl;
   }
   cout << "We hope that our program was useful for you, you can share us your impression of the program if you want or type \'NO\' to exit: " << endl;
@@ -1058,5 +1131,5 @@ void saveImage()
 
   // Add to it .bmp extension and load image
   strcat(imageFileName, ".bmp");
-  writeGSBMP(imageFileName,image);
+  writeGSBMP(imageFileName, image);
 }
