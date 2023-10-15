@@ -1,0 +1,4 @@
+"C:\Program Files\JetBrains\CLion 2022.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2022.2/bin/ninja/win/ninja.exe" -G Ninja -S C:\Users\gamme\Downloads\CS213-2023-2024-Assignment1-V1.0\CS213-2023-2024-Assignment1-V1.0 -B C:\Users\gamme\Downloads\CS213-2023-2024-Assignment1-V1.0\CS213-2023-2024-Assignment1-V1.0\cmake-build-debug
+-- Configuring done
+-- Generating done
+-- Build files have been written to: C:/Users/gamme/Downloads/CS213-2023-2024-Assignment1-V1.0/CS213-2023-2024-Assignment1-V1.0/cmake-build-debug
